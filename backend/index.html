@@ -18,15 +18,31 @@
     
 
     
-    <div id="app"></div>
+    <div id="app">There is a problem with the Vue app.
+    </div>
     
+    <div id="app2">{{msg}}</div>
+
     <script type="module">
       import { createApp } from 'vue/dist/vue.esm-bundler.js'
-      import MainComponent from './seamain.js'
+      //import MainComponent from './seamain.js'
       import App from './src/App2.vue'
+      import Hello from './src/components/App3.vue'
 
       const app = createApp(App);
+
+      // Learning about error handling
+      app.config.errorHandler = (err) => {
+  /* handle error */
+  console.error("WTF THERE WAS AN ERROR \N", err);
+}
+
   app.mount('#app')
+
+
+  // adding a second app instance
+  const app2 = createApp(Hello)
+  app2.mount('#app2')
       
     </script>
     

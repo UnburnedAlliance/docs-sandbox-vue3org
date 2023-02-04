@@ -1,4 +1,4 @@
-// my-component.js
+// no longer in use - circumvented by App2.vue
 export default {
     data() {
       return { count: 0 }

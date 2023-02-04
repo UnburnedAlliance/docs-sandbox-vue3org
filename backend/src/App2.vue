@@ -11,7 +11,7 @@ export default {
 
 <template>
 <button class="slidebox" @click="count++">{{message}}<div class="btnCountDot">{{count}}</div></button>
-<br /><h3>In HelloWorld template</h3>
+<br /><h3 style="text-align:center">App2.vue</h3>
 </template>
 
 <style scoped>

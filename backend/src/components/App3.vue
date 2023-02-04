@@ -1,12 +1,17 @@
-
+<script>
+export default {
+    data() {
+      return { 
+        count: 99,
+        message: 'Seamoss'
+       }
+    }
+  }
+</script>
 
 <template>
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+<button class="slidebox" @click="count--">{{message}}<div class="btnCountDot">{{count}}</div></button>
+<br /><h3 style="text-align:center">App3.vue</h3>
 </template>
 
 <style scoped>
