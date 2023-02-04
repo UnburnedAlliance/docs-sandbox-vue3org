@@ -3,7 +3,17 @@ export default {
     data() {
       return { 
         count: 0,
-        message: 'Seamoss'
+        message: 'Seamoss',
+        testArr: [11,22,33,44,55],
+        vmessage: '<h4 style="background-color:pink;">v-HTML</h4>',
+        dynamicClass: "activeBtn",
+        changeBtnColor(){
+          if(this.dynamicClass == "activeBtn") {
+          this.dynamicClass = "inactiveBtn";
+        } else {
+          this.dynamicClass = "activeBtn";
+        }
+        },
        }
     }
   }
@@ -12,6 +22,12 @@ export default {
 <template>
 <button class="slidebox" @click="count++">{{message}}<div class="btnCountDot">{{count}}</div></button>
 <br /><h3 style="text-align:center">App2.vue</h3>
+<h2>V-HTML</h2>
+<p>Using v-html instead of bracket interpolation so that the parameter can be parsed as HTML:</p>
+<div v-html="vmessage"></div>
+<h2>V-BIND</h2>
+<p>Access Vue variables inside HTML attributes using v-bind:</p>
+<div :class="dynamicClass" @click="changeBtnColor">Click me, I change classes with v-bind:class</div>
 </template>
 
 <style scoped>
