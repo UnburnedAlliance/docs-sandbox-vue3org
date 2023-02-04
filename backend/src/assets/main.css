@@ -55,6 +55,14 @@
   transform: translateX(15px);
 }
 
+#idSample {
+  font-weight: bold;
+}
+
+.classSample {
+  color:red;
+}
+
 a,
 .green {
   text-decoration: none;
