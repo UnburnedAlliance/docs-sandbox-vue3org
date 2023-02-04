@@ -7,11 +7,14 @@ export default {
         testArr: [11,22,33,44,55],
         vmessage: '<h4 style="background-color:pink;">v-HTML</h4>',
         dynamicClass: "activeBtn",
+        isDisabled: true,
         changeBtnColor(){
           if(this.dynamicClass == "activeBtn") {
           this.dynamicClass = "inactiveBtn";
+          this.isDisabled = false;
         } else {
           this.dynamicClass = "activeBtn";
+          this.isDisabled = true;
         }
         },
        }
@@ -27,7 +30,10 @@ export default {
 <div v-html="vmessage"></div>
 <h2>V-BIND</h2>
 <p>Access Vue variables inside HTML attributes using v-bind:</p>
-<div :class="dynamicClass" @click="changeBtnColor">Click me, I change classes with v-bind:class</div>
+<div v-bind:class="dynamicClass" @click="changeBtnColor()">Click me, I change classes with v-bind:class</div>
+<div :class="dynamicClass" @click="changeBtnColor">Same, but shorthand version of v-bind</div>
+<p>:disabled is a reserved boolean attribute and can take a variable.</p>
+<button :disabled="isDisabled">Button</button>
 </template>
 
 <style scoped>
