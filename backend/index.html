@@ -18,18 +18,14 @@
     
 
     
-    <div id="app"><button class="slidebox" onclick="alert('test')">{{message}}</button></div>
+    <div id="app"></div>
     
     <script type="module">
       import { createApp } from 'vue/dist/vue.esm-bundler.js'
-    
-      createApp({
-        data() {
-          return {
-            message: 'Seamoss'
-          }
-        }
-      }).mount('#app')
+      import MainComponent from './seamain.js'
+
+  createApp(MainComponent).mount('#app')
+      
     </script>
     
 
