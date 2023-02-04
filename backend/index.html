@@ -23,8 +23,10 @@
     <script type="module">
       import { createApp } from 'vue/dist/vue.esm-bundler.js'
       import MainComponent from './seamain.js'
+      import App from './src/App2.vue'
 
-  createApp(MainComponent).mount('#app')
+      const app = createApp(App);
+  app.mount('#app')
       
     </script>
     
