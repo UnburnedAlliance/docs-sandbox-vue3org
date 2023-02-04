@@ -86,3 +86,14 @@ body {
   box-shadow: -15px 0px #9e9797;
   transform: translateX(15px);
 }
+
+.btnCountDot {
+  position: absolute;
+  top: -6px;
+  background-color: cadetblue;
+  right: -6px;
+  padding: 5px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
