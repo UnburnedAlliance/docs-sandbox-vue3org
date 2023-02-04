@@ -10,8 +10,7 @@ export default {
 </script>
 
 <template>
-<button class="slidebox" @click="count--">{{message}}<div class="btnCountDot">{{count}}</div></button>
-<br /><h3 style="text-align:center">Primary Window</h3>
+<h1>Top Menu Goes Here</h1>>
 </template>
 
 <style scoped>
@@ -19,6 +18,7 @@ h1 {
   font-weight: 500;
   font-size: 2.6rem;
   top: -10px;
+  text-align: center;
 }
 
 h3 {

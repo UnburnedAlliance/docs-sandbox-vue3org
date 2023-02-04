@@ -1,11 +1,40 @@
 @import './base.css';
 
-#app, #app2 {
+#app {
   max-width: 1280px;
-  margin: 0 auto;
   padding: 2rem;
-
+  background-color: #e0e0e0;
+  min-height: inherit;
   font-weight: normal;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+#app2 {
+  padding: 2rem;
+  background-color: #e9e9;
+  min-height: inherit;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+#topmenu {
+  background-color:blue;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  height: 100px;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.uicontainer {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  min-height: inherit;
 }
 
 a,
@@ -27,8 +56,8 @@ a,
     place-items: center;
   }
 
-  #app {
-    display: block;
-    padding: 0 2rem;
-  }
+}
+
+h3 {
+  color: #000;
 }
