@@ -6,7 +6,7 @@ export default {
     data() {
       return { 
         count: 0,
-        message: "Seamoss"
+        message: "Unburned_Alliance"
        }
     },
     created() {

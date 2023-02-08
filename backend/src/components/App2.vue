@@ -10,14 +10,25 @@ export default {
             '123456',
             '2345678',
             '354875'
-          ]
-        }
+          ],
+          gateData: [
+            {
+              gateID: "123456",
+              gateStatus: "active"
+            },
+            {
+              gateID: "987654",
+              gateStatus: "inactive"
+            }
+        ]
+        },
+        isActive: true
        }
     },
     computed: {
       gateQtyMsg() {
         let gateNum = this.profile.gates.length;
-        return gateNum > 0 ? this.profile.name.concat(" has ", gateNum, " gates.") : "No gates found."
+        return gateNum > 0 ? this.profile.name.concat(" has ", gateNum, " gates.") : "No gates found.";
       },
       clearGatesComputed() {
         this.gates = [];
@@ -30,7 +41,19 @@ export default {
         this.gates = [];
         console.log("Gate data wiped from screen.");
         document.getElementById("gateQtyH2").innerText = "Abe has ".concat(this.gates.length," gates!");
+      },
+      printGates: function() {
+        console.log("Printing gateData");
+        console.log(this.gateData);
+      },
+      reactivate: function(btnID) {
+        let tempClass = document.getElementById(btnID);
+        tempClass.classList.add('active');
       }
+    },
+    mounted() {
+      this.printGates();
+      console.log(this.gateData);
     }
   }
 </script>
@@ -77,9 +100,51 @@ export default {
 }
   </code>
   <p>Now when you run this.fullName = 'John Doe', the setter will be invoked and this.firstName and this.lastName will be updated accordingly. Think of a computed property as declaratively describing how to derive a value based on other values - its only responsibility should be computing and returning that value. Think of a computed value as a 'snapshot'... you should avoid trying to mutate computed values. Instead, update the source state to update the values of a computed property.</p>
+  <h2>Class and Style Bindings</h2>
+<p> Vue provides special enhancements when v-bind is used with class and style. In addition to strings, the expressions can also evaluate to objects or arrays.</p>
+<p>We can pass an object to :class (short for v-bind:class) to dynamically toggle classes:</p>
+<code><p>Gate 1 status (refactor to a loop)</p>
+  <div id="btn2" class="staticStyle" :class="{ active: isActive }">ACTIVE STYLE CLASS</div>
+</code>
+<p>The above syntax means the presence of the active class will be determined by the truthiness of the data property isActive. Check code, it has both  static and ":dynamic" class.</p>
+<button @click="isActive = false">Make Inactive</button><button @click="reactivate('btn2')">Reactivate</button>
+<p>We can also bind to a computed property that returns an object. This is a common and powerful pattern:</p>
+<code>
+  SCRIPT:
+  data() {
+  return {
+    isActive: true,
+    error: null
+  }
+},
+computed: {
+  classObject() {
+    return {
+      active: this.isActive && !this.error,
+      'text-danger': this.error && this.error.type === 'fatal'
+    }
+  }
+}
+TEMPLATE:
+<div :class="classObject"></div>
+</code>
 </template>
 
 <style scoped>
+.staticStyle {
+  width: auto;
+  text-align: center;
+  color: red;
+  border: 2px dotted red;
+  font-weight: bold;
+  background-color: #000;
+  box-shadow: none;
+}
+.active {
+  color: green;
+  border: 2px dotted green;
+}
+
 h1 {
   font-weight: 500;
   font-size: 2.6rem;
