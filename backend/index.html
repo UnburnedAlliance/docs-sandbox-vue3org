@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="./favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
     <link rel="stylesheet" href="./src/assets/main.css">
@@ -17,7 +17,7 @@
     </script>
   
     <div class="uicontainer">
-<div id="topmenu"><p>The top menu goes here.</p></div>
+<div id="topmenu"><p>TOP MENU NOT WORKING</p></div>
     
     <div id="app">There is a problem with the Vue app.
     </div>
@@ -28,30 +28,20 @@
 
     <script type="module">
       import { createApp } from 'vue/dist/vue.esm-bundler.js'
-      //import MainComponent from './seamain.js'
-      import App from './src/App2.vue'
-      import Hello from './src/components/App3.vue'
+      import App from './src/App.vue'
+      import App2 from './src/components/App2.vue'
       import Menu from './src/components/Menu.vue'
 
+      // THREE VUE PANEL
       const app = createApp(App);
-
-      // Learning about error handling
       app.config.errorHandler = (err) => {
-  /* handle error */
-  console.error("WTF THERE WAS AN ERROR \N", err);
-}
-
-  app.mount('#app')
-
-
-  // adding a second app instance
-  const app2 = createApp(Hello)
-  app2.mount('#app2')
-      
-
-  // top menu vue
-  const topmenu = createApp(Menu)
-  topmenu.mount('#topmenu')
+        console.error("WTF THERE WAS AN ERROR \N", err);
+      }
+      app.mount('#app')
+      const app2 = createApp(App2)
+      app2.mount('#app2')
+      const topmenu = createApp(Menu)
+      topmenu.mount('#topmenu')
     </script>
     
 

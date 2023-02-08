@@ -3,7 +3,7 @@ export default {
     data() {
       return { 
         count: 99,
-        message: 'Seamoss'
+        message: 'Naptcha'
        }
     }
   }
