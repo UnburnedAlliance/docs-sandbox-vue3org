@@ -18,6 +18,11 @@ export default {
       gateQtyMsg() {
         let gateNum = this.profile.gates.length;
         return gateNum > 0 ? this.profile.name.concat(" has ", gateNum, " gates.") : "No gates found."
+      },
+      clearGatesComputed() {
+        this.gates = [];
+        console.log("Gate data wiped from screen.");
+        document.getElementById("gateQtyH2").innerText = "Abe has ".concat(this.gates.length," gates!");
       }
     },
     methods: {
@@ -42,8 +47,36 @@ export default {
     }
   }</code><hr />
   <p id="gateQtyH2">{{ gateQtyMsg }} (computed property)</p>
-  <p>Computed properties are good when you need to output results of a function multiple times.</p>
-  <button @click="clearGates()">Clear Gates</button>
+  <p>Computed property: { gateQtyMsg }</p>
+  <p>Exact same thing as Method: { gateQtyMsg() }</p>
+  <button @click="clearGates()">Clear Gates (METHOD)</button><br />
+  <em>A computed property will only re-evaluate when some of its reactive dependencies have changed. Otherwise the end result is the same.</em><br />
+  <button @click="clearGatesComputed">Clear Gates (COMPUTED)</button>
+  <p>Why do we need caching? Imagine we have an expensive computed property list, which requires looping through a huge array and doing a lot of computations. Then we may have other computed properties that in turn depend on list. Without caching, we would be executing list’s getter many more times than necessary! In cases where you do not want caching, use a method call instead. Computed properties are by default getter-only. If you attempt to assign a new value to a computed property, you will receive a runtime warning.  In the rare cases where you need a "writable" computed property, you can create one by providing both a getter and a setter:</p>
+  <code>
+    export default {
+  data() {
+    return {
+      firstName: 'John',
+      lastName: 'Doe'
+    }
+  },
+  computed: {
+    fullName: {
+      // getter
+      get() {
+        return this.firstName + ' ' + this.lastName
+      },
+      // setter
+      set(newValue) {
+        // Note: we are using destructuring assignment syntax here.
+        [this.firstName, this.lastName] = newValue.split(' ')
+      }
+    }
+  }
+}
+  </code>
+  <p>Now when you run this.fullName = 'John Doe', the setter will be invoked and this.firstName and this.lastName will be updated accordingly. Think of a computed property as declaratively describing how to derive a value based on other values - its only responsibility should be computing and returning that value. Think of a computed value as a 'snapshot'... you should avoid trying to mutate computed values. Instead, update the source state to update the values of a computed property.</p>
 </template>
 
 <style scoped>
