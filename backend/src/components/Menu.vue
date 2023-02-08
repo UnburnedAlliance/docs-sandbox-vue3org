@@ -3,7 +3,7 @@ export default {
     data() {
       return { 
         count: 9,
-        message: 'Seamoss'
+        message: "Seamoss"
        }
     },
     mounted() {
@@ -17,13 +17,19 @@ export default {
         console.log("Attempt 1: ", theDot[0].innerHTML);
         document.getElementById("app2Counter").innerHTML = theDot[0].innerHTML;
         return "Temp Result";
+      },
+      changeMsg: function() {
+        console.log("Change message")
+        document.getElementById("message").innerText = document.getElementById("messageChange").value;
       }
     }
   }
 </script>
 
 <template>
-<h2 @click="count++">(inside Menu.vue) {{ count }}</h2>
+  <h1 style="float:right;" id="message">{{ message }}</h1>
+  <form><input id="messageChange" @input="changeMsg()" /></form>
+<p @click="count++">(inside Menu.vue) {{ count }}</p>
 <button @click="getApp2Count">Click Me - Get Count from App2</button>
 <div id="app2Counter">(Get count from App2)</div>
 </template>
