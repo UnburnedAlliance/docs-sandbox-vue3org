@@ -1,14 +1,24 @@
 <script>
+import { nextTick } from 'vue';
+// nextTick will WAIT to execute the commands within until the next time the DOM is updated. 
+import { debounce } from 'lodash-es' // debouncing / throttling concept
 export default {
     data() {
       return { 
-        count: 9,
+        count: 0,
         message: "Seamoss"
        }
     },
-    mounted() {
-      console.log("Menu.vue has been mounted ", this.count, " times.");
-    },
+    created() {
+    // each instance now has its own copy of debounced handler
+    // SEAMOSS: NOT WORKING BELOW
+    //this.debouncedClick = _.debounce(this.click, 500)
+  },
+  unmounted() {
+    // also a good idea to cancel the timer
+    // when the component is removed
+    this.debouncedClick.cancel()
+  },
     methods: {
       getApp2Count: function(){
         console.log("Running module functionn getApp2Count");
@@ -21,7 +31,18 @@ export default {
       changeMsg: function() {
         console.log("Change message")
         document.getElementById("message").innerText = document.getElementById("messageChange").value;
+      },
+      bumpUp: function() {
+        this.count++;
+        console.log("Bump Up: ", this.count);
+        nextTick(() => {
+          console.log("Bump Up (within nextTick)", this.count);
+        })
       }
+    },
+    mounted() {
+      this.bumpUp();
+      console.log("Menu.vue has been mounted ", this.count, " times.");
     }
   }
 </script>
@@ -29,7 +50,7 @@ export default {
 <template>
   <h1 style="float:right;" id="message">{{ message }}</h1>
   <form><input id="messageChange" @input="changeMsg()" /></form>
-<p @click="count++">(inside Menu.vue) {{ count }}</p>
+<p @click="bumpUp">(inside Menu.vue) {{ count }}</p>
 <button @click="getApp2Count">Click Me - Get Count from App2</button>
 <div id="app2Counter">(Get count from App2)</div>
 </template>
