@@ -1,4 +1,5 @@
 <script>
+import { nextTick } from 'vue';
 export default {
     data() {
       return { 
@@ -14,14 +15,15 @@ export default {
           gateData: [
             {
               gateID: "123456",
-              gateStatus: "active"
+              gateStatus: "activeG"
             },
             {
               gateID: "987654",
-              gateStatus: "inactive"
+              gateStatus: "inactiveG"
             }
         ]
         },
+        gateList: undefined, // should become completed HTML of a forEach in gateData
         isActive: true
        }
     },
@@ -44,7 +46,23 @@ export default {
       },
       printGates: function() {
         console.log("Printing gateData");
-        console.log(this.gateData);
+        console.log(this.profile.gateData);
+        document.write(this.profile.gateData);
+        let i = 0;
+        let li = document.getElementById("gateList").appendChild(document.createElement('ul'));
+        nextTick(() => {
+            li.classList.add("gateiconul");
+          });
+        this.profile.gateData.forEach(gate => {
+          console.log("Gate #? ", gate);
+          let gateItem = li.appendChild(document.createElement('li'));
+          i++; // wtf
+          gateItem.classList.add('gateitem');
+          gateItem.classList.add(gate.gateStatus);
+          //li.getElementsByTagName('p')[0].innerText = gate.gateID;
+          gateItem.innerText = gate.gateID.concat(', ',gate.gateStatus);
+        });
+
       },
       reactivate: function(btnID) {
         let tempClass = document.getElementById(btnID);
@@ -53,12 +71,13 @@ export default {
     },
     mounted() {
       this.printGates();
-      console.log(this.gateData);
+      console.log(this.profile.gateData);
     }
   }
 </script>
 
 <template>
+  <div id="gateList"><em>Gates List:</em></div>
 <button class="slidebox" @click="count--">{{message}}<div class="btnCountDot">{{count}}</div></button>
 <br /><h3 style="text-align:center">Primary Window</h3>
 <p>This vue shows off "Computed Properties", they are like functions but exist in double {} and don't take inputs.</p>
@@ -104,7 +123,9 @@ export default {
 <p> Vue provides special enhancements when v-bind is used with class and style. In addition to strings, the expressions can also evaluate to objects or arrays.</p>
 <p>We can pass an object to :class (short for v-bind:class) to dynamically toggle classes:</p>
 <code><p>Gate 1 status (refactor to a loop)</p>
-  <div id="btn2" class="staticStyle" :class="{ active: isActive }">ACTIVE STYLE CLASS</div>
+{{ printGates }}
+  <div id="btn2" class="staticStyle" :class="{ active: isActive }">ACTIVE STYLE CLASS</div><!-- short for v-bind:class. v-bind accepts objects. 
+  the key would be the class name you want to add in this instance, and the value is the truthy value of a variable. -->
 </code>
 <p>The above syntax means the presence of the active class will be determined by the truthiness of the data property isActive. Check code, it has both  static and ":dynamic" class.</p>
 <button @click="isActive = false">Make Inactive</button><button @click="reactivate('btn2')">Reactivate</button>
@@ -131,6 +152,23 @@ TEMPLATE:
 </template>
 
 <style scoped>
+.activeG {
+  background-color: green;
+  color: green;
+  list-style-image: url("../assets/cat.gif") !important;
+}
+.inactiveG {
+  color: red;
+}
+.gateiconul { 
+  color: red;
+}
+
+.gateitem {
+  font-weight: bolder;
+  color: pink;
+  list-style-image: url("../assets/cat.gif");
+}
 .staticStyle {
   width: auto;
   text-align: center;
@@ -143,6 +181,12 @@ TEMPLATE:
 .active {
   color: green;
   border: 2px dotted green;
+}
+
+.inactive {
+  color: black;
+  border: 5px dotted red;
+  background-color: yellow;
 }
 
 h1 {
